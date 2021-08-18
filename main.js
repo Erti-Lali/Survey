@@ -5,23 +5,28 @@ const closeBtn = document.querySelector('.close');
 const checkYes = document.querySelectorAll('.check-yes');
 const checkNo = document.querySelectorAll('.check-no');
 
-submitBtn.addEventListener('click', () => {    
+submitBtn.addEventListener('click', () => {
 
-    let score = 0;
-
+    let percent = 0;
+    let i = 0;
+    
     checkYes.forEach((el) => {
         if (el.checked === true) {
-            score += 25;
+            percent += 25;
         };
     });
 
     modal.style.display = 'block';
 
-    if(score === 0) {
-        modalInner.innerHTML = 'You dont want to work in office'
-    } else {
-        modalInner.innerHTML = `${score}% You want to work in office.`;
-    }
+    if (percent === 0) {
+        modalInner.innerHTML = 'You dont want to work in office';
+    } else {        
+        const interval = setInterval(() => {
+            modalInner.innerHTML = `${i}% You want to work in office.`;
+            if (i == percent) clearInterval(interval);
+            else i++;
+        }, 20);
+    };
 });
 
 modal.addEventListener('click', () => {
